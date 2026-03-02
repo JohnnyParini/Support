@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cal Poly CM - App Support</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cal-poly-green: #154734;
+            --gold: #C69214;
+            --light-gold: #D4AF37;
+            --tan-text: #F5E6D3;
+            --yellow-button: #FFD700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Serif 4', serif;
+            background: var(--cal-poly-green);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--tan-text);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(196, 146, 20, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -30%;
+            left: -15%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(5deg); }
+            66% { transform: translate(-20px, 20px) rotate(-5deg); }
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--light-gold) 100%);
+            padding: 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            color: var(--cal-poly-green);
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: rgba(21, 71, 52, 0.8);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 2.5rem 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            animation: slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: rgba(21, 71, 52, 0.95);
+            border: 3px solid var(--gold);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            padding: 2.5rem;
+            position: relative;
+            transition: box-shadow 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(196, 146, 20, 0.4);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--gold), var(--light-gold));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            color: var(--tan-text);
+            letter-spacing: 1.5px;
+        }
+
+        h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            color: var(--light-gold);
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .faq-item {
+            padding: 1.25rem;
+            background: rgba(255,255,255,0.04);
+            border-left: 3px solid var(--gold);
+        }
+
+        .contact-box {
+            background: rgba(196, 146, 20, 0.12);
+            border: 2px solid var(--gold);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-box p {
+            margin-bottom: 1rem;
+            opacity: 0.85;
+        }
+
+        .email-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--light-gold));
+            color: var(--cal-poly-green);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            padding: 0.875rem 2rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+        }
+
+        .email-link:hover {
+            background: linear-gradient(135deg, var(--light-gold), var(--gold));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+        }
+
+        .email-text {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 0.4rem 0.9rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--light-gold);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .card { padding: 1.75rem 1.25rem; }
+            .header-content { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div>
+                <h1>App Support</h1>
+                <div class="subtitle">Cal Poly Construction Management</div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <!-- About -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📱</div>
+                    <h2>Cal Poly CM App</h2>
+                </div>
+                <p>Welcome to the support page for the Cal Poly Construction Management iOS app. Here you'll find answers to common questions and a way to reach our team directly.</p>
+                <div class="badge-row">
+                    <span class="badge">iOS App</span>
+                    <span class="badge">Cal Poly SLO</span>
+                    <span class="badge">Construction Management</span>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">❓</div>
+                    <h2>Frequently Asked Questions</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3>How do I create an account?</h3>
+                        <p>You can sign up using your email address and a password, or sign in with your Google account. Tap "Sign In" on the app's home screen to get started.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>I forgot my password. How do I reset it?</h3>
+                        <p>On the sign-in screen, tap "Forgot Password?" and enter your email address. You'll receive a password reset link — be sure to check your spam or junk folder if it doesn't appear within a few minutes.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How do I check in to events?</h3>
+                        <p>Once signed in, navigate to the Events section. Tap an event to view details and use the check-in button when you're at the venue. Location or a QR code may be required depending on the event.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How do I delete my account?</h3>
+                        <p>Go to Account Settings within the app. Tap "Delete My Account" and follow the confirmation steps. Please note that deletion is permanent and removes all your data, including event check-ins, club memberships, and saved companies.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Is my data kept private?</h3>
+                        <p>Your personal information is only used within the Cal Poly CM platform and is not shared with third parties. Event data and memberships are accessible to authorized club administrators.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>The app is crashing or not loading. What should I do?</h3>
+                        <p>Try closing and reopening the app first. If the issue persists, check that you're running the latest version from the App Store, then restart your device. If problems continue, please contact us below.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">✉️</div>
+                    <h2>Contact Support</h2>
+                </div>
+                <div class="contact-box">
+                    <p>Can't find what you're looking for? Our team is happy to help. Reach out and we'll get back to you as soon as possible.</p>
+                    <a href="mailto:cccecalpoly@gmail.com" class="email-link">Email Us</a>
+                    <p class="email-text">cccecalpoly@gmail.com</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 Cal Poly Construction Management. All rights reserved.
+    </footer>
+</body>
+</html>
